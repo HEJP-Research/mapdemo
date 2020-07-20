@@ -1,0 +1,118 @@
+<!--
+  Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+  1.0.0
+  https://github.com/EitanJoseph/SCARES-Mini-Tool
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- 
+      Use this to change the text that appears on the tab in the browser when you're on a page
+    -->
+    <title>HEJP Preliminary Tool</title>
+
+    <!-- 
+      Link necessary scripts (index.js, jquery) and stylesheet (index.css)
+    -->
+
+    <script type="text/javascript" src="index.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container {
+        margin-bottom: 15px;
+      }
+      body {
+        margin-bottom: 20px;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body onload="loopSamples()">
+    <div style="margin-left: 15px;">
+      <h3>HEJP Post-doc Preliminary Tool</h3>
+
+      <p>
+        Below are sample images from the various modes of this tool that allows
+        for data analysis of Higher Education Postdoctoral Job postings. This
+        includes 3 images of the map mode, 3 images of the bar graph mode, and 3
+        images of the line graph mode. If you hover over a mode, you will see 1
+        of the sample images for the mode. Click on a mode to be redirected to
+        that mode. From within each mode, you can navigate to the other modes.
+        If you wish to continue previewing the other modes after hovering over a
+        mode, click "Keep Previewing".
+      </p>
+    </div>
+    
+    <a
+    href="bar_mode"
+    onmouseover="displayHoveredImage(1)"
+    style="margin-left: 15px;"
+    >Bar Mode</a
+  >
+
+  <a href="line_mode" onmouseover="displayHoveredImage(2)">Line Mode</a>
+  <a href="map_mode" onmouseover="displayHoveredImage(3)">Map Mode</a>
+
+  <button
+  id="previewBtnID"
+  onclick="loopSamples()"
+  style="margin-left: 15px;"
+>
+  Keep Previewing
+</button>
+
+<br>
+
+  <label style="margin-left: 15px;" id="mode_description">
+    Hover over a mode to see a description of the mode.
+  </label>
+
+    <div>
+      <!--
+      This holds the image of a sample from each of the slide websites.
+      This styling keeps all 6 images in the same height/width division. 
+      This way we don't get the page moving the links/image around for different images. 
+    -->
+      <img
+        style="height: 70%; width: 70%; object-fit: contain; margin-left: 15px;"
+        src="sample_mode_images/sample_mode_image1.png"
+        id="sampleImageID"
+        alt="Sample Image for Bar Graph Mode"
+      />
+
+    </div>
+  </body>
+</html>

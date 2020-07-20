@@ -1,0 +1,33 @@
+<!-- 
+ @author Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+ @since  1.0.0
+ @link   https://github.com/EitanJoseph/SCARES-Mini-Tool
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />    
+    <title>Voting Map</title>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="slider.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <div class="slidecontainer">
+      <div class="slider-bar">
+        <input type="range" min="1976" max="2016" step="4" value="1996" class="slider" id="myRange" oninput="updateCurrYearSlider()">
+      </div>
+      <input type="text" id="currYearInput" value="1996" text="1996">
+      <button id="go" onclick="updateCurrYearText()">Go</button>
+      <button id="animate" value="0" onclick="this.value = (this.value == '0' ? '1' : '0'); animateYears();" onmouseover="updateColor(this, this.value)" onmouseout="revertColor(this)">Animate</button>
+    </div>
+  </head>
+
+  <body>
+    <div id="map-holder"></div>
+    <script type="text/javascript" src="solomon.js"></script>
+    <script type="text/javascript" src="map.js"></script>
+  </body>
+</html>

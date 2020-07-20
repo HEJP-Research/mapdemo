@@ -1,0 +1,149 @@
+/**
+ * @author Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+ * @since  1.0.0
+ * @link   https://github.com/EitanJoseph/SCARES-Mini-Tool
+ */
+
+body {
+  margin: 0;
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: 200;
+  font-size: 15px;
+}
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #000000; /* Black */
+}
+
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #38d11a; /* green */
+  color: white;
+}
+
+input[type=text] {
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: #ffffff;
+  height: 30px;
+  width: 27px;
+  background:url(sliderImg-smaller.png) center no-repeat !important;
+}
+
+#map-holder {
+  margin: 20px;
+  max-width: 95vw;
+  width: 100vw;
+  height: 100vh;
+  border-style: solid;
+  align-content: center;
+}
+
+svg rect {
+  fill: rgb(211, 238, 255);   /* map background colour*/
+}
+.country{
+  fill: #d0d0d0;   /* country colour */
+  stroke: #2A2C39; /* country border colour */
+  stroke-width: 1; /* country border width */
+}
+.country-on{
+  fill: #4B5358;   /* highlight colour for selected country */
+}
+.countryLabel{
+  visibility: hidden;   /* hide all country labels by default */
+}
+.countryName{
+  fill: black;   /* country label text colour */
+}
+.countryLabelBg{
+  /*fill: #30BCED;   /* country label background colour */
+  fill: white;
+}
+
+.republican{
+  fill: #ff4f4f;
+}
+.democrat{
+  fill:#525aff;
+}
+.other{
+  fill: #52ff5b;
+}
+.white{
+  fill: white;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+  margin-left: 20px;
+}
+
+
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider {
+  margin-top: 20px;
+  -webkit-appearance: none;
+  width: 200px;
+  height: 20px;
+  border-radius: 2px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-style: groove;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: black;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 0%;
+  background: black;
+  cursor: pointer;
+  background:url(sliderImg-smaller.png) center no-repeat !important;
+  outline: none;
+  border: 0px;
+}
+
+.textInput {
+  width: 200px;
+  height: 50px;
+  font-size: 40;
+}
+
+*:focus {
+  outline: 0 !important;
+}

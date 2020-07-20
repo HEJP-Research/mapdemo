@@ -1,0 +1,216 @@
+/*
+ * @author Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+ * @since  1.0.0
+ * @link   https://github.com/EitanJoseph/SCARES-Mini-Tool
+ */
+body {
+  margin: 0;
+  /*background-color: white;*/
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+  font-size: 15px;
+}
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #000000; /* Black */
+}
+
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #38d11a; /* green */
+  color: white;
+}
+
+input[type="text"] {
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+input[type="text"]:focus {
+  border: 3px solid #555;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: #ffffff;
+  height: 30px;
+  width: 27px;
+}
+
+#graph-holder {
+  margin: 20px;
+  max-width: 95vw;
+  width: 75vw;
+  height: 100vh;
+  border-style: solid;
+  align-content: center;
+  /*fill: rgb(200,200,200);*/
+  background-color: rgb(225,225,225); 
+}
+
+.bar {
+  /*fill: rgb(186, 25, 0);*/
+  /*fill: rgb(255, 184, 87);*/
+  fill: rgb(71,186,83);
+  /*font: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+}
+
+
+.bar:hover {
+  fill: rgb(121,235,133);
+  /*fill: rgb(255, 95, 70);*/
+  /*fill: rgb(255, 214, 83);*/
+}
+
+.title {
+  font: bold 1.6vw "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ytext {
+  font: bold 1.6vw "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.axis {
+  font: 0.6vw sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+svg rect {
+  fill: rgb(200, 200, 200); /* map background colour*/
+}
+
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+.textInput {
+  width: 200px;
+  height: 50px;
+  font-size: 40;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+button {
+  background-color: white;
+  color: black;
+  font-size: large;
+  border: 2px solid #000000; /* Black */
+  width: 90px;
+  height: 40px;
+}
+
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #38d11a; /* green */
+  color: white;
+}
+
+.wrap {
+  display: grid;
+  grid-template-rows: max-content 1em;
+  margin: 1em auto;
+  width: 20em;
+}
+
+input[type="range"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5, 1.5);
+  margin-left: 30px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider {
+  margin-top: 20px;
+  width: 200px;
+  height: 4px;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-style: groove;
+}
+
+.textInput {
+  width: 200px;
+  height: 50px;
+  font-size: 40;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+button {
+  background-color: white;
+  color: black;
+  font-size: large;
+  border: 2px solid #000000; /* Black */
+  width: 90px;
+  height: 40px;
+}
+
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #38d11a; /* green */
+  color: white;
+}
+
+.wrap {
+  display: grid;
+  grid-template-rows: max-content 1em;
+  margin: 1em auto;
+  width: 20em;
+}
+
+input[type="range"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5, 1.5);
+  margin-left: 30px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}

@@ -1,0 +1,367 @@
+<!--
+  Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+  1.0.0
+  https://github.com/EitanJoseph/SCARES-Mini-Tool
+
+  This EJS file contains the HTML elements for the line graph mode of the mini tool.
+-->
+
+<html>
+<!-- 
+    Head of the file. Here the necessary scripts (with the exception of line_mode.js) are imported.
+  -->
+
+<head>
+  <title>Line Graph Mode</title>
+
+  <!-- 
+      Links the necessary external script files: JQuery, D3 
+    -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+  <!--
+      Links the necessary local script file: line_mode_lib.js (used for controlling input elements
+      on this file and process user input)
+    -->
+  <script type="text/javascript" src="scripts/line_mode/line_mode_lib.js"></script>
+
+  <!-- Link the necessary style sheet-->
+  <link rel="stylesheet" href="scripts/line_mode/line_mode_styles.css" />
+</head>
+
+<!-- 
+  Body of the file, on load use getDataFromServer() to draw the graph.
+-->
+
+<body onload="getDataFromServer(true)" onresize="
+        lastColor = (lastColor-1)%colors.length;
+        if(lastColor < 0) {lastColor += colors.length};
+        clear();
+        getDataFromServer(false);">
+  <!--
+    This button is utilized by the user to clear the page of all the generated
+    graphs as opposed to the user having to click on each one of them.
+  -->
+  <button style="float:right; margin-right: 35px; margin-top: 35px;" id="reset" onclick="clearGraph()">
+    Clear
+  </button>
+
+  <!-- 
+  This button is used to generate a new graph based on the user inputs. This
+  will add a new line graph to any existing ones in a new color.
+-->
+  <button style="float: right; margin-right: 5px; margin-top: 35px" id="go" onclick="getDataFromServer(false); ">
+    Go
+  </button>
+
+  <!-- 
+      This dropdown menu is used to select the various views/modes in the tool. That is, from this point, you can 
+      be redirected to the map and line graph modes.
+    -->
+  <select
+    style="float: right; margin-right: 5px; margin-top: 35px; width: 160px; height: 40px; font-size: large; border: 2px solid #000000"
+    id="view_mode_select_id" name="view_mode_select" onchange="location=this.value">
+    <option value="map_mode">Map Mode</option>
+    <option value="bar_mode">Bar Graph Mode</option>
+    <option value="line_mode" selected="selected">Line Graph Mode</option>
+  </select>
+
+  <!--
+      This holds the description for this line graph mode.
+    -->
+  <div style="float: left; margin-left: 30px;">
+    <h1>HEJP Postdoctoral Data</h1>
+    <div style="width:1400">
+      The graph below is for all postdoctoral jobs between 2007 and 2017.
+      However, you can refine your analysis using the input areas on the
+      right. After changing some settings, click "Go" and a new line graph
+      will be displayed on top of the existing graph. Continue in this manner
+      to create more and more lines. If you do not want to see a graph
+      anymore, you can click on it to remove it. If you want to see what a
+      specific line graph represents, hover over it and its information will
+      appear in the text area at right. To clear the graph entirely, click
+      "Clear".
+    </div>
+  </div>
+
+  <!-- This div holds the graphs as well as the input areas next to each other -->
+  <!-- inline-block and grid-child purple allow for the query optoins to float right of the map -->
+  <div class="grid-container" style="float:left;">
+    <!-- This div holds the graphs -->
+    <div id="graph-holder" class="grid-child purple" style="margin-right:0px;display: inline-block;">
+      <!-- Importing line_mode which is responsible for drawing graphs here. -->
+      <script type="text/javascript" src="scripts/line_mode/line_mode.js"></script>
+    </div>
+
+    <!--
+        This div holds the user input / selection areas.
+      -->
+    <div class="grid-child green" style="margin-left:0px; margin-right: 10px; display: inline-block;">
+      <!-- Description to be placed above career areas input area -->
+      <h4>Graphs Description</h4>
+
+      <!--
+          This text area will be used for the display of the data for the graph that the user is currently hovering over. It is disabled
+          to be read only.
+        -->
+      <textarea placeholder="Hover over a line to get a description of the graphed data." rows="20" id="description"
+        cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list"
+        aria-haspopup="true" style="resize: none;" disabled></textarea>
+
+      <!-- Description to be placed above career areas input area -->
+      <h4>Career Areas</h4>
+      <p>
+        Leaving all boxes unchecked will yield results for all career areas.
+      </p>
+
+      <!-- 
+          This div will "fake" a dropdown menu of checkboxes. When the user mouses out, then the division is hidden to
+          simulate the dropdown menu closing upwards. 
+        -->
+      <div style="width: 335px" onmouseleave="hideDiv('careerarea_checkboxes')">
+        <!-- The dropdown menu is triggered by clicking a button that imitates the look of a dropdown menu -->
+        <button onclick="viewDiv('careerarea_checkboxes')"
+          style="width:160px; height:25px; font-size:small; background-color: white; color:black; margin-bottom:0px;">
+          Select a Career Area ▼
+        </button>
+
+        <!-- This div will hold divisions of each checkbox in the faked dropdown -->
+        <div id="careerarea_checkboxes" style="display: none; border: 2px solid; width: 335px;" class="checkbox_select">
+          <br />
+          <div>
+            <input type="checkbox" id="checkbox1" name="checkbox_select" onclick="updateCheckBox(1)" />
+            <label id="label1" for="checkbox1">Planning and Analysis</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox2" name="checkbox_select" onclick="updateCheckBox(2)" />
+            <label id="label2" for="checkbox2">Engineering</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox3" name="checkbox_select" onclick="updateCheckBox(3)" />
+            <label id="label3" for="checkbox3">Agriculture, Horticulture, & the Outdoors</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox4" name="checkbox_select" onclick="updateCheckBox(4)" />
+            <label id="label4" for="checkbox4">Customer and Client Support</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox5" name="checkbox_select" onclick="updateCheckBox(5)" />
+            <label id="label5" for="checkbox5">Science and Research</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox6" name="checkbox_select" onclick="updateCheckBox(6)" />
+            <label id="label6" for="checkbox6">Sales</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox7" name="checkbox_select" onclick="updateCheckBox(7)" />
+            <label id="label7" for="checkbox7">Education and Training</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox8" name="checkbox_select" onclick="updateCheckBox(8)" />
+            <label id="label8" for="checkbox8">Health Care including Nursing</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox9" name="checkbox_select" onclick="updateCheckBox(9)" />
+            <label id="label9" for="checkbox9">Information Technology</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox10" name="checkbox_select" onclick="updateCheckBox(10)" />
+            <label id="label10" for="checkbox10">Finance</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox11" name="checkbox_select" onclick="updateCheckBox(11)" />
+            <label id="label11" for="checkbox11">Other</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox12" name="checkbox_select" onclick="updateCheckBox(12)" />
+            <label id="label12" for="checkbox12">Law, Compliance, and Public Safety</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox13" name="checkbox_select" onclick="updateCheckBox(13)" />
+            <label id="label13" for="checkbox13">Performing Arts</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox14" name="checkbox_select" onclick="updateCheckBox(14)" />
+            <label id="label14" for="checkbox14">Hospitality, Food, and Tourism</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox15" name="checkbox_select" onclick="updateCheckBox(15)" />
+            <label id="label15" for="checkbox15">Marketing and Public Relations</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox16" name="checkbox_select" onclick="updateCheckBox(16)" />
+            <label id="label16" for="checkbox16">Design, Media, and Writing</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox17" name="checkbox_select" onclick="updateCheckBox(17)" />
+            <label id="label17" for="checkbox17">Transportation</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox18" name="checkbox_select" onclick="updateCheckBox(18)" />
+            <label id="label18" for="checkbox18">Personal Services</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox19" name="checkbox_select" onclick="updateCheckBox(19)" />
+            <label id="label19" for="checkbox19">Maintenance, Repair, and Installation</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox20" name="checkbox_select" onclick="updateCheckBox(20)" />
+            <label id="label20" for="checkbox20">Business Management and Operations</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox21" name="checkbox_select" onclick="updateCheckBox(21)" />
+            <label id="label21" for="checkbox21">Manufacturing and Production</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox22" name="checkbox_select" onclick="updateCheckBox(22)" />
+            <label id="label22" for="checkbox22">Construction, Extraction, and Architecture</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox23" name="checkbox_select" onclick="updateCheckBox(23)" />
+            <label id="label23" for="checkbox23">Community and Social Services</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox24" name="checkbox_select" onclick="updateCheckBox(24)" />
+            <label id="label24" for="checkbox24">Clerical and Administrative</label>
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox25" name="checkbox_select" onclick="updateCheckBox(25)" />
+            <label id="label25" for="checkbox25">Human Resources</label>
+          </div>
+          <br />
+        </div>
+
+        <!-- This holds the description of the division (science, humanities, etc.) selection menu for the user. -->
+        <h4>Division</h4>
+        <p>
+          Use the dropdown menu below to restrict the job results to a
+          specific division.
+        </p>
+
+        <!-- Here, an actual HTML selection dropdown menu is used to select from the list of divisions -->
+        <select id="division_select_id" name="division_select" onchange="updateDivisionSelection()">
+          <option value="unrestricted">Any division</option>
+          <option value="soc_sci">Social Sciences</option>
+          <option value="sci">Sciences</option>
+          <option value="hum">Humanities</option>
+          <option value="other">Other</option>
+        </select>
+
+        <!-- Here is the description of the job type selection area (part time, full time, etc.) -->
+        <h4>Job Type</h4>
+        <p>
+          Use the dropdown menu below to restrict the job results to a
+          specific job type. Not selecting a specific job type will yield
+          results from all job types.
+        </p>
+
+        <!-- Here, an actual HTML selection dropdown menu is used to select from the list of possible job types -->
+        <select id="jobTypeSelect" onchange="updateJobType()">
+          <option value="unrestricted">Any job type</option>
+          <option value="tenured">Tenured</option>
+          <option value="tenured_track">Tenured Track</option>
+          <option value="contingent">Contingent</option>
+          <option value="fulltime">Full Time</option>
+          <option value="parttime">Part Time</option>
+          <option value="tenureline">Tenure Line</option>
+        </select>
+
+        <br />
+
+        <!-- 
+            Here is the description of the institution length selection area (2 year, 4 year, etc.), the ownership
+            area (public, private), and research type (R1 or not). 
+          -->
+        <h4>Institution Type</h4>
+        <p>
+          Use the left dropdown menu to choose if the institution is either
+          two year or four year. Use the right dropdown menu to choose if the
+          institution is public or private. Use the checkbox to restrict your
+          results to research 1 institutions. If you don't select an option in
+          either of the dropdown menus then results from all choices will be
+          shown.
+        </p>
+
+        <!-- Here, an actual HTML selection dropdown menu is used to select from the list of possible lengths -->
+        <div>
+          <select id="inst_length" onchange="updateInstitutionLength()">
+            <option value="unrestricted">2 or 4 Year</option>
+            <option value="twoyear">2 Year</option>
+            <option value="fouryear">4 Year</option>
+          </select>
+
+          <!-- Here, an actual HTML selection dropdown menu is used to select from the list of possible ownerships -->
+          <select id="inst_ownership" onchange="updateInstitutionOwnership()">
+            <option value="unrestricted">Public or Private</option>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+
+          <!-- A single checkbox + label are used to determine if job is R1 or not -->
+          <input type="checkbox" id="isr1_checkbox" style="margin-left:10px" onclick="updateIsR1()" />
+          <label for="isr1_checkbox">R1 only</label>
+        </div>
+
+        <!-- Description to be placed above beazones input area -->
+        <h4>BEA Zone</h4>
+        <p>
+          Leaving all boxes unchecked will yield results for all BEA Zones.
+        </p>
+
+        <!-- 
+          This div will "fake" a dropdown menu of checkboxes. When the user mouses out, then the division is hidden to
+          simulate the dropdown menu closing upwards. 
+        -->
+        <div style="width: 335px" onmouseleave="hideDiv('beazone_checkboxes')">
+          <!-- The dropdown menu is triggered by clicking a button that imitates the look of a dropdown menu -->
+          <button onclick="viewDiv('beazone_checkboxes')"
+            style="width:160px; height:25px; font-size:small; background-color: white; color:black; margin-bottom:0px;">
+            Select BEA Zone ▼
+          </button>
+
+          <!-- This div will hold divisions of each checkbox in the faked dropdown -->
+          <div id="beazone_checkboxes" style="display: none; border: 2px solid; width: 335px;" class="checkbox_select">
+            <br />
+            <div>
+              <input type="checkbox" id="checkbox26" name="checkbox_select" onclick="updateCheckBox(26)" />
+              <label id="label26" for="checkbox26">New England</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox27" name="checkbox_select" onclick="updateCheckBox(27)" />
+              <label id="label27" for="checkbox27">Mideast</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox28" name="checkbox_select" onclick="updateCheckBox(28)" />
+              <label id="label28" for="checkbox28">Great Lakes</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox29" name="checkbox_select" onclick="updateCheckBox(29)" />
+              <label id="label29" for="checkbox29">Plains</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox30" name="checkbox_select" onclick="updateCheckBox(30)" />
+              <label id="label30" for="checkbox30">Southeast</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox31" name="checkbox_select" onclick="updateCheckBox(31)" />
+              <label id="label31" for="checkbox31">Southwest</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox32" name="checkbox_select" onclick="updateCheckBox(32)" />
+              <label id="label32" for="checkbox32">Rocky Mountain</label>
+            </div>
+            <div>
+              <input type="checkbox" id="checkbox33" name="checkbox_select" onclick="updateCheckBox(33)" />
+              <label id="label33" for="checkbox33">Far West</label>
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

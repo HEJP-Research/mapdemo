@@ -1,0 +1,155 @@
+/*
+ * @author Ruth Rosenblum, Chami Lamelas, Eitan Joseph
+ * @since  1.0.0
+ * @link   https://github.com/EitanJoseph/SCARES-Mini-Tool
+*/
+body {
+  margin: 0;
+  background-color: white;
+  font-family: "Arial", sans-serif;
+  font-weight: 200;
+  font-size: 15px;
+}
+
+input[type="text"] {
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+input[type="text"]:focus {
+  border: 3px solid #555;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: #ffffff;
+  height: 30px;
+  width: 27px;
+}
+
+#graph-holder {
+  margin: 20px;
+  max-width: 95vw;
+  width: 75vw;
+  height: 100vh;
+  border-style: solid;
+  align-content: center;
+}
+
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+svg rect {
+  fill: rgb(211, 238, 255); /* map background colour*/
+}
+
+.textInput {
+  width: 200px;
+  height: 50px;
+  font-size: 40;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+button {
+  background-color: white;
+  color: black;
+  font-size: large;
+  border: 2px solid #000000; /* Black */
+  width: 90px;
+  height: 40px;
+}
+
+button {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #38d11a; /* green */
+  color: white;
+}
+
+input[type="range"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5, 1.5);
+  margin-left: 30px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider {
+  margin-top: 20px;
+  width: 200px;
+  height: 4px;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-style: groove;
+}
+
+.textInput {
+  width: 200px;
+  height: 50px;
+  font-size: 40;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+.wrap {
+  display: grid;
+  grid-template-rows: max-content 1em;
+  margin: 1em auto;
+  width: 20em;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+textarea {
+  width: 400px;
+  height: 100px;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+  border-image: none;
+  border-radius: 6px 6px 6px 6px;
+  border-style: none solid solid none;
+  border-width: medium 1px 1px medium;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+  color: #555555;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1em;
+  line-height: 1.4em;
+  padding: 5px 8px;
+  transition: background-color 0.2s ease 0s;
+  
+}
+
+
+textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
